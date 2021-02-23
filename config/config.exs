@@ -7,8 +7,7 @@
 # General application configuration
 use Mix.Config
 
-config :rocketpay,
-  ecto_repos: [Rocketpay.Repo]
+config :rocketpay, ecto_repos: [Rocketpay.Repo]
 
 # Configures the endpoint
 config :rocketpay, RocketpayWeb.Endpoint,
@@ -17,6 +16,11 @@ config :rocketpay, RocketpayWeb.Endpoint,
   render_errors: [view: RocketpayWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Rocketpay.PubSub,
   live_view: [signing_salt: "FWuP2Eza"]
+
+config :rocketpay, Rocketpay.Repo,
+migration_primary_key: [type: :binary_id],
+migration_foreign_key: [type: :binary_id]
+
 
 # Configures Elixir's Logger
 config :logger, :console,
