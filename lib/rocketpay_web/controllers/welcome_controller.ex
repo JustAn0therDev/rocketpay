@@ -1,10 +1,11 @@
 defmodule RocketpayWeb.WelcomeController do
   use RocketpayWeb, :controller
 
-  # underscore at the beginning of a parameter name makes it optional
+  alias Rocketpay.Numbers
+
   def index(connection, %{"filename" => filename}) do
     filename
-    |> Rocketpay.Numbers.sum_from_file()
+    |> Numbers.sum_from_file
     |> handle_response(connection)
   end
 
@@ -16,8 +17,7 @@ defmodule RocketpayWeb.WelcomeController do
 
   defp handle_response({:error, reason}, connection) do
     connection
-    |> put_status(:ok)
+    |> put_status(:internal_server_error)
     |> json(%{message: reason})
   end
-
 end
