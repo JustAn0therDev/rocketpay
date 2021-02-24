@@ -1,7 +1,7 @@
-defmodule Rocketpay.Users.Create do
+defmodule Rocketpay.User.Create do
   alias Rocketpay.{Repo, User}
 
-  def call params do
+  def create_user params do
     params
     |> User.changeset
     |> Repo.insert

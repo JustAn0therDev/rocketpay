@@ -5,7 +5,7 @@ defmodule RocketpayWeb.UsersController do
 
   def create(connection, params) do
     params
-    |> Rocketpay.create_user
+    |> User.Create.create_user
     |> handle_response(connection)
   end
 
@@ -17,7 +17,7 @@ defmodule RocketpayWeb.UsersController do
 
   defp handle_response({:error, result}, connection) do
     connection
-    |> put_status(:bad_request)
+    |> put_status(:bad_request) # there should be a filter to know if the error came from the client or its in the server
     |> put_view(RocketpayWeb.ErrorView)
     |> render("400.json", result: result)
   end
